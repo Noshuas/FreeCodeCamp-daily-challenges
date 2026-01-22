@@ -1,0 +1,9 @@
+** start of script.js **
+
+const parseInlineCode = (md) => md.replaceAll("`", (()=>{
+  let i = 0; 
+  return () => ++i % 2 ? "<code>" : "</code>"
+})())
+
+** end of script.js **
+
