@@ -1,0 +1,44 @@
+** start of script.js **
+
+const getSign = num => {
+  switch (true) {
+    case num % 10 >= 7:
+      return '+'
+    case num % 10 >= 3:
+      return ''
+    default:
+      return '-'
+  }
+}
+
+const avg = (arr) => {
+  const total = arr.reduce((sum, val) => sum + val, 0)
+  console.log(total / arr.length)
+  return total / arr.length
+}
+
+const convertScoreToLetterGrade = num => {
+  const sign = getSign(num);
+  switch (true) {
+    case num >= 90:
+      return "A" + sign
+    case num >= 80:
+      return "B" + sign
+    case num >= 70:
+      return "C" + sign
+    case num >= 60:
+      return "D" + sign
+    default:
+      return "F"
+  }
+}
+
+const getAverageGrade = scores => {
+  return convertScoreToLetterGrade(
+    avg(scores)
+  )
+}
+
+
+** end of script.js **
+
