@@ -1,0 +1,51 @@
+** start of script.js **
+
+// Flatten the Array
+
+// Given an array that contains nested arrays, return a new array with all values flattened into a single, one-dimensional array. Retain the original order of the items in the arrays.
+
+//builtIn
+function flatten(arr) {
+  return arr.flat(Infinity);
+}
+
+// recursive
+function flatten2(arr) {
+  const result = []; 
+
+  for (let el of arr) {
+    if (!Array.isArray(el)) {
+      result.push(el); 
+    } else {
+      result.push(...flatten(el))
+    }
+  }
+
+  return result; 
+}
+
+// Depth first Dynamic approach
+function flatten3(arr) {
+  const result = [];
+  if (!arr.length) return arr;
+  const stack = [arr];
+
+  while (stack.length) {
+    const currentArr = stack[stack.length - 1]
+    const currentEl = currentArr.shift()
+
+    if (!currentArr.length) stack.pop();
+
+    if (Array.isArray(currentEl)) {
+      stack.push(currentEl);
+    } else {
+      result.push(currentEl);
+    }
+  }
+
+  return result;
+}
+
+
+** end of script.js **
+
