@@ -1,0 +1,53 @@
+** start of script.js **
+
+/*
+Letters-Numbers
+
+Given a string containing only letters and numbers, return a new string where a hyphen (-) is inserted every time the string switches from a letter to a number, or a number to a letter.
+*/
+
+// with regex lazy but easy to understand
+function separateLettersAndNumbers2(str) {
+  return str.replaceAll(/([0-9])([a-zA-Z])/g, (match, c1, c2) => {
+    return c1 + '-' + c2;
+  }).replaceAll(/([a-zA-Z])([0-9])/g, (match, c1, c2) => {
+    return c1 + '-' + c2;
+  })
+}
+
+// with regex positive lookahead
+// look-aheads don't consume characters in the match meaning that we
+// will match on every letter preceding a number without consuming the number
+// and every number preceeding a letter without consuming the letter
+function separateLettersAndNumbers1(str) {
+  return str.replaceAll(/\D(?=(\d))|\d(?=(\D))/g, m => `${m}-`)
+}
+
+// For loop 
+function separateLettersAndNumbers(str) {
+  let result = '';
+
+  for (let i = 0; i < str.length; i++) {
+    const cur = str[i];
+    const next = str[i + 1];
+
+    if (!next) return result + cur // early exit
+    
+    result += (cur > -1 !== next > -1) 
+      ? cur + '-'
+      : cur
+    
+    /* More verbose, technically slower, but more clear and probably
+       better as a result
+    
+       const numbers = '0123456789'
+       if (numbers.includes(cur) !== numbers.includes(next)) {
+         result += '-'
+       }
+    */
+  }
+}
+
+
+** end of script.js **
+
