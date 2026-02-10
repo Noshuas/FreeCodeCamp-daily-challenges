@@ -1,0 +1,52 @@
+** start of script.js **
+
+/* 
+2026 Winter Games Day 5: Cross-Country Skiing
+
+Given an array of finish times for a cross-country ski race, convert them into times behind the winner.
+
+    Given times are strings in "H:MM:SS" format.
+    Given times will be in order from fastest to slowest.
+    The winners time (fastest time) should correspond to "0".
+    Each other time should show the time behind the winner, in the format "+M:SS".
+
+For example, given ["1:25:32", "1:26:10", "1:27:05"], return ["0", "+0:38", "+1:33"].
+
+*/
+
+
+// This solution works, but only for the given inputs. It's not clear if we should try to handle the cases where the relative time difference moves into a difference of hours. Should we pad the minutes if hours are more than 1? Be that as it may, this was my first attempt. 
+
+function getRelativeResults(results) {
+  let start = HMMSSToSeconds(results[0]); 
+
+  return results.map((time, i) => {
+    if (i == 0) return '0'; 
+
+    const timeInSeconds = HMMSSToSeconds(time); 
+    return '+' + secondsToMSS(timeInSeconds - start); 
+  })
+}
+
+function padSeconds(num) {
+  const str = num.toString(); 
+  return (str.length == 1) ? `0${str}` : str; 
+}
+
+function HMMSSToSeconds(HMMSS) {
+  const [hours, minutes, seconds] = HMMSS.split(':').map(e => parseInt(e))
+  return hours * 60 * 60 + minutes * 60 + seconds; 
+}
+
+function secondsToMSS(seconds) {
+  const hours = Math.floor(seconds / (60 * 60))
+  const minutes = Math.floor((seconds - (hours * 60 * 60)) / 60)
+  const seconds2 = Math.floor(seconds - (hours * 60 * 60) - (minutes * 60))
+
+  return `${minutes}:${padSeconds(seconds2)}`
+}
+
+console.log(getRelativeResults(["1:25:32", "1:26:10", "1:27:05"]))
+
+** end of script.js **
+
