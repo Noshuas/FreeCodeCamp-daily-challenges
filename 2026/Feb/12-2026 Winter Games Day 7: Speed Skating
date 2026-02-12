@@ -1,0 +1,30 @@
+** start of script.js **
+
+/*
+
+2026 Winter Games Day 7: Speed Skating
+
+Given two arrays representing the lap times (in seconds) for two speed skaters, return the lap number where the difference in lap times is the largest.
+
+The first element of each array corresponds to lap 1, the second to lap 2, and so on.
+
+
+*/
+
+// O(n) solution. 
+function largestDifference(skater1, skater2) {
+  let lapWithLargestDiff = 0; 
+  let largestDiff = 0; 
+
+  for (let i = 0; i < skater1.length; i++) {
+    const lapDiff = Math.abs(skater1[i] - skater2[i])
+    if (lapDiff > largestDiff) {
+      largestDiff = lapDiff; 
+      lapWithLargestDiff = i + 1; 
+    }
+  }
+  return lapWithLargestDiff;
+}
+
+** end of script.js **
+
